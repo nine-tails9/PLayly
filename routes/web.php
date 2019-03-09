@@ -27,7 +27,12 @@ Route::get('/playLists', function () {
 Route::get('/playPlaylist/{id}', function () {
 
     $list = Playlists::find(request()->id);
-    $songs = $list->songs()->get();
+    $songss = $list->songs()->get();
+    
+    $songs= array();
+    foreach($songss as $song){
+        array_push($songs, $song->songs);
+    }
     return view('playPlaylist', compact('songs'));
 });
 

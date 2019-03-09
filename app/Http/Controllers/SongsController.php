@@ -18,14 +18,13 @@ class SongsController extends Controller
         if($extension != 'mp3'){
             return redirect()->back();
         }
-
-        $req->song->store('songs');
+        $path = $req->song->store('public');
 
     	$entry = new Songs;
 		$entry->mime = $file->getClientMimeType();
 		$entry->original_filename = $file->getClientOriginalName();
-		$entry->filename = $file->getFilename().'.'.$extension;
+		$entry->filename = $path;
 		$entry->save();
-		return redirect('/home'); 
+		return redirect('/home')->with('message', 'Song Uploaded');
     }
 }

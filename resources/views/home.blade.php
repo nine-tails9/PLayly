@@ -25,5 +25,8 @@
             </div>
         </div>
     </div>
+    @if(Session::has('message'))
+        <p class="alert alert-success w-25">{{ Session::get('message') }}</p>
+    @endif
 </div>
 @endsection
