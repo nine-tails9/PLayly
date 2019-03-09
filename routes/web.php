@@ -1,5 +1,7 @@
 <?php
 use App\Songs;
+use App\Playlists;
+use App\songsList;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,7 +25,10 @@ Route::get('/playLists', function () {
 
 
 Route::get('/playPlaylist/{id}', function () {
-    return view('playPlaylist');
+
+    $list = Playlists::find(request()->id);
+    $songs = $list->songs()->get();
+    return view('playPlaylist', compact('songs'));
 });
 
 
@@ -41,7 +46,8 @@ Route::get('/uploadSong', function () {
 
 Route::post('/uploadSong', 'SongsController@store');
 Route::get('/allSongs', function () {
-    return view('allSongs');
+    $songs = Songs::all();
+    return view('allSongs',  compact('songs'));
 });
 
 Auth::routes();

@@ -2,9 +2,9 @@
 @section('content')
 
 	<div class="container">
-                <h2>My Playlists</h2>
+                <h2>My Library</h2>
         <div class="row">
-        @foreach($list as $lis)
+        @foreach($songs as $lis)
                 <div class="col">
                 <div class="card" style="width: 18rem;">
                 <div class="card-body">

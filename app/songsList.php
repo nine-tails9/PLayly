@@ -8,9 +8,9 @@ class songsList extends Model
 {
     //
     public function songs(){
-        return $this->hasMany(Songs::class);
+        return $this->hasOne(Songs::class, 'id', 'songs_id');
     }
     public function playlist(){
-        return $this->belongsTo(Playlists::class);
+        return $this->belongsTo(Playlists::class, 'playlists_id', 'id');
     }
 }

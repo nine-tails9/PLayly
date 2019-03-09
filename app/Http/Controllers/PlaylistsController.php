@@ -21,7 +21,7 @@ class PlaylistsController extends Controller
         foreach($req['songs'] as $s){
             $song = new songsList;
             $song->playlist()->associate($play);
-            $song->song_id = $s;
+            $song->songs_id = $s;
             $song->save();
         }
         return back();
