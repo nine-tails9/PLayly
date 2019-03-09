@@ -1,5 +1,5 @@
 <?php
-
+use App\Songs;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,18 +17,23 @@ Route::get('/', function () {
 
 
 Route::get('/playLists', function () {
-    return view('playLists');
+    $list = Auth::user()->playlists()->get();
+    return view('MyplayLists', compact('list'));
 });
 
 
-Route::get('/playPlaylist', function () {
+Route::get('/playPlaylist/{id}', function () {
     return view('playPlaylist');
 });
 
 
 Route::get('/CreateplayList', function () {
-    return view('CreateplayList');
+    $songs = Songs::all();
+    return view('CreateplayList', compact('songs'));
 });
+
+Route::post('/CreateplayList', 'PlaylistsController@store');
+
 
 Route::get('/uploadSong', function () {
     return view('uploadSong');

@@ -18,6 +18,8 @@
                         <a href="{{ url('/uploadSong') }} ">Upload Song</a>
                         <a href="{{ url('/allSongs') }} ">All Songs</a>
                         <a href="{{ url('/playLists') }} ">My Playlists</a>
+                        <a href="{{ url('/CreateplayList') }} ">Create Playlist</a>
+
                     </div>
                 </div>
             </div>
