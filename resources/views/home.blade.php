@@ -14,7 +14,11 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <div class="links">
+                        <a href="{{ url('/uploadSong') }} ">Upload Song</a>
+                        <a href="{{ url('/allSongs') }} ">All Songs</a>
+                        <a href="{{ url('/playLists') }} ">My Playlists</a>
+                    </div>
                 </div>
             </div>
         </div>

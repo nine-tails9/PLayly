@@ -34,8 +34,9 @@ Route::get('/uploadSong', function () {
     return view('uploadSong');
 });
 
+Route::post('/uploadSong', 'SongsController@store');
 Route::get('/allSongs', function () {
-    return view('uploadSong');
+    return view('allSongs');
 });
 
 Auth::routes();
