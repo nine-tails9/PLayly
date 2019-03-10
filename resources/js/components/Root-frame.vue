@@ -2,7 +2,7 @@
 
 <div>
     <musicFrame v-bind:currentMusic="currentMusic"></musicFrame>
-    <playlist :songs="songs"></playlist>
+    <playlist :songs="songs" class="m-5"></playlist>
     <ul>
     </li>
     </ul>

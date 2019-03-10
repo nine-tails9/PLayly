@@ -1,10 +1,10 @@
 <template>
     <div class="container">
         <h2>{{ title }} </h2>
-        <audio controls ref="player" autoplay>
+        <audio controls ref="player" autoplay @ended="onEnd">  
             <source preload="auto" :src="currSrc" type = "audio/mp3"></source>
         </audio>
-        {{currSrc}}
+        <button @click="onEnd">ss</button>
     </div>
 </template>
  
@@ -23,7 +23,7 @@ import { bus } from "../app";
     mounted: function () {
         this.$watch('currSrc', () => {
             this.$refs.player.load()
-        })
+        });
     },
     created(){
         bus.$on('change', (data)=>{
@@ -32,8 +32,11 @@ import { bus } from "../app";
         });
     },
     methods:{
-
+        onEnd: function(){
+            bus.$emit('end');
+        }
     }
     
   }
+
 </script>

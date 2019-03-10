@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Songly</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -81,13 +81,15 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                        Songly
                 </div>
 
                 <div class="links">
                     <a href="{{ url('/uploadSong') }} ">Upload Song</a>
                     <a href="{{ url('/allSongs') }} ">All Songs</a>
                     <a href="{{ url('/playLists') }} ">My Playlists</a>
+                    <a href="{{ url('/CreateplayList') }} ">Create Playlist</a>
+
                 </div>
             </div>
         </div>

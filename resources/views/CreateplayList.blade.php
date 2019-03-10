@@ -5,14 +5,28 @@
 
     <form action="{{ url('/CreateplayList') }}" method="post">
         @csrf
-        <input type="text" name="name">
-        <ul>
+        <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Playlist name</label>
+                <div class="col-sm-10">
+                  <input type="text" name="name">
+                </div>
+              </div>
+      
         @foreach($songs as $song)
-        <li><input type="checkbox" name = "songs[]" value="{{ $song->id }}">{{ $song->original_filename }}</li>
+        <div class="form-check">
+        <input class="form-check-input" type="checkbox" name = "songs[]" value="{{ $song->id }}">{{ $song->original_filename }}
+
+        </div>
         @endforeach 
-        </ul>
-        <input type="submit" value="Create">
+       
+        <input type="submit" value="Create" class="btn btn-success mb-2">
     </form>
+    @if(Session::has('message'))
+        <p class="alert alert-success w-25">{{ Session::get('message') }}</p>
+    @endif
+    @if(Session::has('errors'))
+    <p class="alert alert-danger w-25">Fields Missing</p>
+    @endif
 	</div>
 
 

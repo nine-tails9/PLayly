@@ -10,9 +10,19 @@ use Auth;
 class PlaylistsController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function store(Request $req)
     {
         # code...
+        $req->validate([
+            'name' => 'required|max:255',
+            'songs' =>'required'
+        ]);
+        
         $name = $req['name'];
         $play = new Playlists;
         $play->name = $name;
@@ -24,6 +34,6 @@ class PlaylistsController extends Controller
             $song->songs_id = $s;
             $song->save();
         }
-        return back();
+        return back()->with('message', 'Playlist Created');
     }
 }

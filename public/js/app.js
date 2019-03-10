@@ -1845,7 +1845,11 @@ __webpack_require__.r(__webpack_exports__);
       _this2.title = data.original_filename;
     });
   },
-  methods: {}
+  methods: {
+    onEnd: function onEnd() {
+      _app__WEBPACK_IMPORTED_MODULE_0__["bus"].$emit('end');
+    }
+  }
 });
 
 /***/ }),
@@ -1872,6 +1876,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['songs'],
@@ -1883,8 +1897,16 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     swapData: function swapData(data) {
       this.currentMusic = data;
+      this.currentMusic = data.id;
       _app__WEBPACK_IMPORTED_MODULE_0__["bus"].$emit('change', data);
     }
+  },
+  created: function created() {
+    var _this = this;
+
+    _app__WEBPACK_IMPORTED_MODULE_0__["bus"].$on('end', function () {
+      _this.swapData(_this.songs[Math.floor(Math.random() * _this.songs.length)]);
+    });
   }
 });
 
@@ -40085,7 +40107,7 @@ var render = function() {
     [
       _c("musicFrame", { attrs: { currentMusic: _vm.currentMusic } }),
       _vm._v(" "),
-      _c("playlist", { attrs: { songs: _vm.songs } }),
+      _c("playlist", { staticClass: "m-5", attrs: { songs: _vm.songs } }),
       _vm._v(" "),
       _c("ul")
     ],
@@ -40117,12 +40139,21 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("h2", [_vm._v(_vm._s(_vm.title) + " ")]),
     _vm._v(" "),
-    _c("audio", { ref: "player", attrs: { controls: "", autoplay: "" } }, [
-      _c("source", {
-        attrs: { preload: "auto", src: _vm.currSrc, type: "audio/mp3" }
-      })
-    ]),
-    _vm._v("\n    " + _vm._s(_vm.currSrc) + "\n")
+    _c(
+      "audio",
+      {
+        ref: "player",
+        attrs: { controls: "", autoplay: "" },
+        on: { ended: _vm.onEnd }
+      },
+      [
+        _c("source", {
+          attrs: { preload: "auto", src: _vm.currSrc, type: "audio/mp3" }
+        })
+      ]
+    ),
+    _vm._v(" "),
+    _c("button", { on: { click: _vm.onEnd } }, [_vm._v("ss")])
   ])
 }
 var staticRenderFns = []
@@ -40148,25 +40179,43 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "ul",
-      _vm._l(_vm.songs, function(song) {
-        return _c("li", [
-          _c(
-            "button",
-            {
-              on: {
-                click: function($event) {
-                  return _vm.swapData(song)
-                }
-              }
-            },
-            [_vm._v(_vm._s(song.original_filename) + " ")]
-          )
-        ])
-      }),
-      0
-    )
+    _c("div", { staticClass: "container" }, [
+      _c("h5", [_vm._v("Currrent Library")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "row" },
+        _vm._l(_vm.songs, function(song) {
+          return _c("div", { staticClass: "col-4" }, [
+            _c(
+              "div",
+              { class: { "bg-secondary": song.id == _vm.currentMusic } },
+              [
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h5", { staticClass: "card-title" }, [
+                    _vm._v(_vm._s(song.original_filename))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function($event) {
+                          return _vm.swapData(song)
+                        }
+                      }
+                    },
+                    [_vm._v("\n          Play\n        ")]
+                  )
+                ])
+              ]
+            )
+          ])
+        }),
+        0
+      )
+    ])
   ])
 }
 var staticRenderFns = []
